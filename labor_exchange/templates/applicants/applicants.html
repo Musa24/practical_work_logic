@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+
+<table class="table">
+  <h1>ЗАЯВИТЕЛИ</h1>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Education Level</th>
+      <th scope="col">Working Experience</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Ability to use a Computer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for applicant in applicants %}
+    <tr>
+      <th scope="row">{{applicant.id}}</th>
+      <td>{{applicant.firstName}}</td>
+      <td>{{applicant.lastName}}</td>
+      <td>{{applicant.age}}</td>
+      <td>{{applicant.education}}</td>
+      <td>{{applicant.experience}} year</td>
+      <td>{{applicant.gender}}</td>
+      {% if applicant.computer %}
+      <td>YES</td>
+      {% else %}
+      <td>NO</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

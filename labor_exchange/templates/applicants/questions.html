@@ -1,0 +1,168 @@
+{% extends "base.html" %} {% block content %}
+
+<form action="{% url 'questions' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="inputState"
+      >Qn. 1. Найти всех соискателей, которые соответствуют требованиям по
+      заданной должности. :</label
+    >
+    <select id="inputState" class="form-control" name="experience">
+      <option value="0">No Experience</option>
+      <option value="1">1 year</option>
+      <option value="2">2 years</option>
+      <option value="3">More than 2 years</option>
+    </select>
+  </div>
+
+  <div class="form-group my-5">
+    <label for="inputState"
+      >Qn 2.Подсчитать количество соискателей, имеющих высшее образование.
+    </label>
+    <select id="inputState" class="form-control" name="education">
+      <option value="">...</option>
+      <option value="bachelor">Bachelor</option>
+      <option value="master">Master</option>
+      <option value="phd">PHD</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="inputState"
+      >Qn. 3 Найти все должности для соискателей с указанным стажем работы по
+      специальности. .:</label
+    >
+    <select id="inputState" class="form-control" name="experience3">
+      <option value="">...</option>
+      <option value="0">No Experience</option>
+      <option value="1">1 year</option>
+      <option value="2">2 years</option>
+      <option value="3">More than 2 years</option>
+    </select>
+  </div>
+
+  <div class="form-group my-4">
+    <label for="income"
+      >Qn 4. Найти все должности для мужчин с ежемесячным доходом выше
+      указанного значения. :</label
+    >
+    <input
+      type="text"
+      class="form-control"
+      id="income"
+      placeholder="Monthly Income"
+      name="income"
+    />
+  </div>
+
+  <button class="my-5">Search</button>
+</form>
+
+<table class="table">
+  Qn.1
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Company</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Education Level</th>
+      <th scope="col">Working Experience</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Ability to use a Computer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for applicant in applicants %}
+    <tr>
+      <th scope="row">{{applicant.id}}</th>
+      <td>{{applicant.company}}</td>
+      <td>{{applicant.firstName}}</td>
+      <td>{{applicant.lastName}}</td>
+      <td>{{applicant.age}}</td>
+      <td>{{applicant.education}}</td>
+      <td>{{applicant.experience}} year</td>
+      <td>{{applicant.gender}}</td>
+      {% if applicant.computer %}
+      <td>YES</td>
+      {% else %}
+      <td>NO</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if counts.qn2 %}
+
+<p>Qn 2 .Всего абитуриентов с высшим образованием => {{counts.counts}}</p>
+
+{% if income.qn3 %}
+
+<table class="table">
+  <p>Qn 4.</p>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Monthly Income</th>
+      <th scope="col">Position Availability</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for company in income.companies %}
+    <tr>
+      <th scope="row">{{company.id}}</th>
+      <td>{{company.name}}</td>
+      <td>{{company.position}}</td>
+      <td>{{company.income}}&#8381;</td>
+      {% if company.available %}
+      <td>Yes</td>
+      {% else %}
+      <td>No</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if experience.qn4 %}
+<table class="table">
+  <p>Qn 3.</p>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Company</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Education Level</th>
+      <th scope="col">Working Experience</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Ability to use a Computer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for applicant in experience.applicants %}
+    <tr>
+      <th scope="row">{{applicant.id}}</th>
+      <td>{{applicant.company}}</td>
+      <td>{{applicant.firstName}}</td>
+      <td>{{applicant.lastName}}</td>
+      <td>{{applicant.age}}</td>
+      <td>{{applicant.education}}</td>
+      <td>{{applicant.experience}} year</td>
+      <td>{{applicant.gender}}</td>
+      {% if applicant.computer %}
+      <td>YES</td>
+      {% else %}
+      <td>NO</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %} {% endif %} {% endif %} {% endblock %}

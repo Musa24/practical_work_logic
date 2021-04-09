@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container mt-5">
+  <h4>ДОБАВЛЕНИЕ КОМПАНИИ</h2>
+  <form action="{% url 'add' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="company_name">Enter Company Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="company_name"
+        placeholder="Company name"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="position">Job Position:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="position"
+        placeholder="Job Position"
+        name="position"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="income">Monthly Income:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="income"
+        placeholder="Monthly Income"
+        name="income"
+      />
+    </div>
+
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Available Position</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="available"
+              id="gridRadios1"
+              value="Yes"
+              checked
+            />
+            <label class="form-check-label" for="gridRadios1"> No </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="available"
+              id="gridRadios2"
+              value="No"
+            />
+            <label class="form-check-label" for="gridRadios2"> Yes </label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+
+{% endblock %}

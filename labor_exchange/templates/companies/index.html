@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+
+<table class="table">
+  <h2>Компании</h2>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Monthly Income</th>
+      <th scope="col">Position Availability</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for company in companies %}
+    <tr>
+      <th scope="row">{{company.id}}</th>
+      <td>{{company.name}}</td>
+      <td>{{company.position}}</td>
+      <td>{{company.income}}&#8381;</td>
+      {% if company.available %}
+      <td>Yes</td>
+      {% else %}
+      <td>No</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
